@@ -175,12 +175,12 @@
     <div id="subject"></div>
     <div id="thesis"></div>
 
-    <button class="button" id="spinAgain" onClick="theWheel.startAnimation();">Nog een keer</button>
+    <button class="button" id="spinAgain" onClick="again();">Nog een keer</button>
 </div>
 
 <script>
-    let theWheel = new Winwheel({
-        'numSegments': 13,
+    const properties = {
+        'numSegments': 15,
         'outerRadius': 400,
         'innerRadius': 100,
         'centerX': 400,
@@ -246,38 +246,45 @@
                     'thesis': 'Pak een nieuw drankje en drink hem in een keer leeg',
                 },
                 {
-                    'fillStyle': '#55ea00',
+                    'fillStyle': '#00ff00',
                     'text': 'Activiteit',
                     'thesis': 'Ga douchen',
                 },
                 {
                     'fillStyle': '#ff00ff',
                     'text': 'Alcohol',
-                    'thesis': 'Neem een slokje van je drankje',
+                    'thesis': 'Shotje',
+                },
+                {
+                    'fillStyle': '#00ff00',
+                    'text': 'Activiteit',
+                    'thesis': 'Vertel een grap, als mensen lachen hoef je niet te drinken, als niemand lacht moet je je drankje adten',
                 },
                 {
                     'fillStyle': '#ff00ff',
-                    'text': 'Activiteit',
-                    'thesis': 'Vertel een grap, als mensen lachen hoef je niet te drinken, als niemand lacht moet je je drankje adten',
-                }
+                    'text': 'Alcohol',
+                    'thesis': 'HOEDJE',
+                },
             ],
         'animation':
             {
                 'type': 'spinToStop',
-                'duration': 8,
-                'spins': 6,
+                'duration': 6,
+                'spins': 4,
                 'callbackBefore': startedSpinning,
                 'callbackSound': playSound,
                 'callbackFinished': setThesis,
                 'soundTrigger': 'pin'
             },
-        'pins':                // Turn pins on.
+        'pins':
             {
-                'number': 13,
+                'number': 15,
                 'fillStyle': 'black',
                 'outerRadius': 4,
             }
-    });
+    };
+
+    let theWheel = new Winwheel({...properties});
 
     // Loads the tick audio sound in to an audio object.
     let audio = new Audio('tick.mp3');
@@ -290,6 +297,11 @@
 
         // Play the sound.
         audio.play();
+    }
+
+    function again() {
+        theWheel = new Winwheel({...properties});
+        theWheel.startAnimation();
     }
 
     function startedSpinning() {
